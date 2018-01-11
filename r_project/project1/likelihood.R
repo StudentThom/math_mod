@@ -46,6 +46,19 @@ averaged_resp_weights <- function(data, pi_vector, alpha, beta) {
 }
 
 
+#####
+pi_vector = c(0.3,0.4,0.3)
+alpha = c(1,1,5)
+beta = c(1,3,1)
+
+em_algo <- function(data,pi_vector,alpha,beta, number_of_iterations){
+  for (n in 1:number_of_iterations){
+    pi_vector = averaged_resp_weights(data, pi_vector, alpha, beta)
+  }
+  pi_vector
+}
+
+
 
 # plot for beta variable
 ## initiate values
