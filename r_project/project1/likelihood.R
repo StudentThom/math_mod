@@ -20,32 +20,20 @@ expected_resp <- function(x, pi_vector, j, alpha, beta){
   sum = 0
   w_i_j = 0
   length_vect = length(pi_vector)
-  for (k in length_vect) {
-    # take unif distr if k == 1, else beta distr
-    #if (k == 1){
-    #  sum = sum + pi_vector[k] * dunif(x)
-    #}
-    #else {
+  for (k in 1:length_vect) {
     sum <- sum + ((pi_vector[k] * dbeta(x,alpha[k],beta[k])))
-    #}
   }
-  
-  # take unif distr if j == 1, else beta distr
-  # if (j == 1) {
-  #   w_i_j = (pi_vector[j] * dunif(x)) / sum
-  # }
-  # else {
   w_i_j = (pi_vector[j] * dbeta(x, alpha[j], beta[j])) / sum
-  #}
   
-  #w_i_j
-  sum
+  # return
+  w_i_j
 }
 
 averaged_resp_weights <- function(data, pi_vector, alpha, beta) {
-  sum = 0
-  pi__new_vector = 0
-  for (j in length(pi_vector)){
+  #sum = 0
+  pi_new_vector = 0
+  for (j in 1:length(pi_vector)){
+    sum = 0
     for (i in 1:length(data)){
       sum = sum + expected_resp(data[i], pi_vector, j, alpha, beta)
     }
@@ -56,6 +44,8 @@ averaged_resp_weights <- function(data, pi_vector, alpha, beta) {
   }
   pi_new_vector
 }
+
+
 
 # plot for beta variable
 ## initiate values
