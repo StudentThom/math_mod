@@ -13,5 +13,3 @@ plot_distribution <- function(data, pi_vector, alpha, beta){
   lines(x,y)
 }
 
-x <- seq(0,1,0.01)
-lines(x,dbeta(x,1,4))

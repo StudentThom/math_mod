@@ -11,7 +11,10 @@ number_of_iterations = 25
 pi_vector = c(0.3,0.7)
 
 # run EM algo
-pi_vector <- em_algo(data,pi_vector,alpha,beta,number_of_iterations)
+lijst <- em_algo(data,pi_vector,alpha,beta,number_of_iterations)
+pi_vector <- lijst[[1]]
+alpha <- lijst[[2]]
+beta <- lijst[[3]]
 
 # plot result
 plot_distribution(data, pi_vector, alpha, beta)
