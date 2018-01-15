@@ -3,10 +3,10 @@
 
 ### EXAMPLE 1 ###
 # variables
-data = allp$p1
+data = allp$p4
 alpha = c(1,1)
 beta = c(1,3)
-number_of_iterations = 25
+number_of_iterations = 10
 # initial value
 pi_vector = c(0.3,0.7)
 
