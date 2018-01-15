@@ -40,8 +40,9 @@ likelihood <- function(data,pi_0, pi_1, alpha, beta) {
 
 out <- optim(c(1,1),loglik,x=y,lower=c(0,0), method="L-BFGS-B")
 
-out <- optim(par = c(1,1),fn = loglik1_par,data=allp$p1[1:10],lower=c(0,0), method="L-BFGS-B")
+out <- optim(par = c(1,1),fn = loglik1_par,data=allp$p1,lower=c(0,0), method="L-BFGS-B")
 
+out <- optimize(f = loglik, interval = c(0,10),data=allp$p1,maximum=TRUE)
 ####
 
 alphas = seq(0.01,10,0.5)
