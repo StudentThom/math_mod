@@ -42,6 +42,7 @@ out <- optim(c(1,1),loglik,x=y,lower=c(0,0), method="L-BFGS-B")
 
 out <- optim(par = c(1,4),fn = loglik1_par,data=allp$p1,lower=c(0.1,0.1), method="L-BFGS-B", control = list(fnscale=-1))
 
+
 out <- optimize(f = loglik, interval = c(0,10),data=allp$p1,maximum=TRUE)
 ####
 
