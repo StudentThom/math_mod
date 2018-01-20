@@ -41,7 +41,9 @@ averaged_resp_weights <- function(data, pi_vector, alpha, beta) {
     pi_new_vector[j] = average
     
     if (j != 1){
-      par <- optim(c(alpha[j],beta[j]),loglik1_par,data=data,lower=c(0.1,0.1), method="L-BFGS-B",control = list(fnscale=-1))$par
+      #par <- optim(c(alpha[j],beta[j]),loglik1_par,data=data,lower=c(0.1,0.1), method="L-BFGS-B",control = list(fnscale=-1))$par
+      out <- optim(c(alpha[j],beta[j]),expectation_f,lower=c(0.1,0.1),method="L-BFGS-B",data=allp$p1,pi_vector=pi_vector,j=j, alphas=alpha,betas=beta,control=list(fnscale = -1))
+      par <- out$par
       alpha[j] = par[[1]]
       beta[j] = par[[2]]
     }
