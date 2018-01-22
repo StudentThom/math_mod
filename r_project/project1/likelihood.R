@@ -1,5 +1,5 @@
 # first test on likelihood
-# install.packages("plot3D")
+install.packages("plot3D")
 library(plot3D)
 
 load('allp.Rdata')
@@ -30,7 +30,6 @@ expected_resp <- function(x, pi_vector, j, alpha, beta){
 }
 
 averaged_resp_weights <- function(data, pi_vector, alpha, beta) {
-  #sum = 0
   pi_new_vector = 0
   for (j in 1:length(pi_vector)){
     sum = 0
@@ -41,8 +40,16 @@ averaged_resp_weights <- function(data, pi_vector, alpha, beta) {
     average = sum / length(data)
     pi_new_vector[j] = average
     
+    if (j != 1){
+      #par <- optim(c(alpha[j],beta[j]),loglik1_par,data=data,lower=c(0.1,0.1), method="L-BFGS-B",control = list(fnscale=-1))$par
+      out <- optim(c(alpha[j],beta[j]),expectation_f,lower=c(0.1,0.1),method="L-BFGS-B",data=allp$p1,pi_vector=pi_vector,j=j, alphas=alpha,betas=beta,control=list(fnscale = -1))
+      par <- out$par
+      alpha[j] = par[[1]]
+      beta[j] = par[[2]]
+    }
   }
-  pi_new_vector
+  
+  list(pi_new_vector, alpha, beta)
 }
 
 
@@ -53,9 +60,12 @@ beta = c(1,3,1)
 
 em_algo <- function(data,pi_vector,alpha,beta, number_of_iterations){
   for (n in 1:number_of_iterations){
-    pi_vector = averaged_resp_weights(data, pi_vector, alpha, beta)
+    lijst = averaged_resp_weights(data, pi_vector, alpha, beta)
+    pi_vector = lijst[[1]]
+    alpha = lijst[[2]]
+    beta = lijst[[3]]
   }
-  pi_vector
+  list(pi_vector, alpha, beta)
 }
 
 

@@ -13,6 +13,9 @@ allp[[1]][[1]]
 pvector1 = allp[[1]]
 hist(pvector1)
 
+par(mfrow=c(2,2))
 for (vector_number in seq(1,length(allp))){
   hist(allp[[vector_number]], main=paste("Hist of pvector", vector_number),xlab = "p value")
 }
+
+plot(sort(pvector1))

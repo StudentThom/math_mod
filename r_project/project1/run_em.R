@@ -3,15 +3,18 @@
 
 ### EXAMPLE 1 ###
 # variables
-data = allp$p1
-alpha = c(1,1,5)
-beta = c(1,3,1)
-number_of_iterations = 25
+data = allp$p4[1:10]
+alpha = c(1,3)
+beta = c(1,1)
+number_of_iterations = 1
 # initial value
-pi_vector = c(0.3,0.4,0.3)
+pi_vector = c(0.3,0.7)
 
 # run EM algo
-pi_vector <- em_algo(data,pi_vector,alpha,beta,number_of_iterations)
+lijst <- em_algo(data,pi_vector,alpha,beta,number_of_iterations)
+pi_vector <- lijst[[1]]
+alpha <- lijst[[2]]
+beta <- lijst[[3]]
 
 # plot result
 plot_distribution(data, pi_vector, alpha, beta)
