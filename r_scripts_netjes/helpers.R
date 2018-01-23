@@ -118,13 +118,23 @@ em_algo <- function(data,pi_vector,alpha,beta, number_of_iterations){
   #' TO DO?!: replace number_of_titerations criteria with convergence criteria
   #'
 
+  pi_vector_archive = matrix(0,number_of_iterations,length(pi_vector))
+  alpha_archive = matrix(0,number_of_iterations,length(alpha))
+  beta_archive = matrix(0,number_of_iterations,length(beta))
+  
   for (n in 1:number_of_iterations){
     lijst = averaged_resp_weights(data, pi_vector, alpha, beta)
     pi_vector = lijst[[1]]
     alpha = lijst[[2]]
     beta = lijst[[3]]
+    
+    # keep track of parameters during the process
+    pi_vector_archive[n,1:length(pi_vector)] = pi_vector
+    alpha_archive[n,1:length(alpha)] = alpha
+    beta_archive[n,1:length(beta)] = beta
+    
   }
-  list(pi_vector, alpha, beta)
+  list(pi_vector, alpha, beta, pi_vector_archive, alpha_archive, beta_archive)
 }
 
 plot_distribution <- function(data, pi_vector, alpha, beta, main){

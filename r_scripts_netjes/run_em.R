@@ -8,12 +8,12 @@ source("load_and_plot.R")
 
 ### EXAMPLE 1 ###
 # variables
-data = allp$p1
-alpha = c(1,3)
-beta = c(1,1)
-number_of_iterations = 3
+data = allp$p2
+alpha = c(1,0.93,3)
+beta = c(1,2.96,2)
+number_of_iterations = 8
 # initial value
-pi_vector = c(0.3,0.7)
+pi_vector = c(0.5,0.3,0.2)
 
 # run EM algo
 start_time <- Sys.time()
@@ -22,6 +22,9 @@ end_time <- Sys.time()
 pi_vector_new <- lijst[[1]]
 alpha_new <- lijst[[2]]
 beta_new <- lijst[[3]]
+pi_vector_archive <- lijst[[4]]
+alpha_archive <- lijst[[5]]
+beta_archive <- lijst[[6]]
 
 print_results(alpha,beta,pi_vector,start_time,alpha_new,beta_new,pi_vector_new,end_time)
 
