@@ -1,6 +1,10 @@
 # Run EM algorith
 
-setwd("/home/thom/Documents/wiskunde/2017-2018/math_mod/r_scripts_netjes")
+install.packages("tictoc")
+library("tictoc")
+
+# setwd("/home/thom/Documents/wiskunde/2017-2018/math_mod/r_scripts_netjes")
+setwd("/media/mynewdrive1/Documenten/Wiskunde/2017-2018/math_mod/r_scripts_netjes")
 
 # imports
 source("helpers.R")
@@ -8,10 +12,10 @@ source("load_and_plot.R")
 
 ### EXAMPLE 1 ###
 # variables
-data = allp$p3
-alpha = c(1,1)
-beta = c(1,8)
-number_of_iterations = 5
+data = allp$p1
+alpha = c(1,3)
+beta = c(1,1)
+number_of_iterations = 11
 # initial value
 pi_vector = c(0.5,0.5)
 
@@ -49,4 +53,40 @@ pi_vector <- em_algo(data,pi_vector,alpha,beta,number_of_iterations)
 # plot result
 plot_distribution(data, pi_vector, alpha, beta)
 
+
+#########################################
+# Plot distributions for each iteration #
+#########################################
+
+par(mfrow=c(4,3))
+x_pos_1 <- 0.5
+x_pos_2 <- 0.58
+x_pos_3 <- 0.72
+y_pos_1 <- 1.7
+y_pos_2 <- 1.55
+y_pos_3 <- 1.40
+# plot for initial value
+plot_distribution(data, pi_vector, alpha, beta,main="")
+text(x_pos_1,y_pos_1,expression(alpha[2]))
+text(x_pos_2,y_pos_1,"=")
+text(x_pos_3,y_pos_1,round(alpha[2],digits=2))
+text(x_pos_1,y_pos_2,expression(beta[2]))
+text(x_pos_2,y_pos_2,"=")
+text(x_pos_3,y_pos_2,round(beta[2],digits=2))
+text(x_pos_1,y_pos_3,expression(pi[2]))
+text(x_pos_2,y_pos_3,"=")
+text(x_pos_3,y_pos_3,round(pi_vector[2],digits=2))
+# all other plots
+for (n in 1:11){
+  plot_distribution(data, pi_vector_archive[n,], alpha_archive[n,], beta_archive[n,],main="")
+  text(x_pos_1,y_pos_1,expression(alpha[2]))
+  text(x_pos_2,y_pos_1,"=")
+  text(x_pos_3,y_pos_1,round(alpha_archive[n,2],digits=2))
+  text(x_pos_1,y_pos_2,expression(beta[2]))
+  text(x_pos_2,y_pos_2,"=")
+  text(x_pos_3,y_pos_2,round(beta_archive[n,2],digits=2))
+  text(x_pos_1,y_pos_3,expression(pi[2]))
+  text(x_pos_2,y_pos_3,"=")
+  text(x_pos_3,y_pos_3,round(pi_vector_archive[n,2],digits=2))
+}
 

@@ -6,7 +6,7 @@ x <- seq(0,1,length=101)
 y <- seq(0,0,length=101)
 
 for (i in 1:length(x)){
-  y[i] <- likelihood_f(x[i],pi_vector,alphas,betas)
+  y[i] <- log_likelihood_f(x[i],pi_vector,alphas,betas)
 }
 
 plot(x,y)
@@ -22,7 +22,7 @@ for (i in 1:length(data)){
   product <- (product * sum)
 }
 ###
-lengte = 16000
+lengte = 20000
 y <- seq(0,0,length=lengte)
 for (i in 1:length(y)){
   y[i] <- likelihood_f(allp$p1[i],pi_vector,alphas,betas)
@@ -34,3 +34,33 @@ for (k in 1:length(z)){
   z[k] <- prod(y[1:k])
 }
 plot(x,z)
+
+
+#####################################################
+# plot log likelihood as function of alpha and beta #
+#####################################################
+# install.packages("plot3D")
+library("plot3D")
+
+alpha_vector = seq(0.1,1000,length=10)
+beta_vector = seq(0.1,1000,length=10)
+pi_vector <- c(0.65,0.35)
+
+M <- mesh(alpha_vector,beta_vector)
+
+ans_matrix <- matrix(0,nrow=length(alpha_vector),ncol=length(beta_vector))
+
+for (j_1 in 1:length(alpha_vector)){
+  for (j_2 in 1:length(beta_vector)){
+    ans_matrix[j_1,j_2] <- log_likelihood_f(allp$p1,pi_vector,c(1,alpha_vector[j_1]),c(1,beta_vector[j_2]))
+  }
+}
+
+surf3D(M$x,M$y,ans_matrix, colkey=FALSE,bty="b2",xlab="alpha",ylab="beta",zlab="log likelihood")
+
+
+#################
+x <- seq(0,1,length=101)
+plot(x,dbeta(x,1,500))
+
+

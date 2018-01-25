@@ -115,6 +115,18 @@ likelihood_f <- function(data, pi_vector, alphas, betas){
   return(product)
 }
 
+log_likelihood_f <- function(data, pi_vector, alphas, betas){
+  sum_total <- 0
+  for (i in 1:length(data)){
+    sum_distr <- 0
+    for (j in 1:length(pi_vector)){
+      sum_distr <- (sum_distr + (pi_vector[j] * dbeta(data[i],alphas[j],betas[j])))
+    }   
+   sum_total <- (sum_total + sum_distr)
+  }
+  return(sum_total)
+}
+
 em_algo <- function(data,pi_vector,alpha,beta, number_of_iterations){
   
   #' Execute EM algorith
