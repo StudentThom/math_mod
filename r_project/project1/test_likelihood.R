@@ -42,21 +42,36 @@ plot(x,z)
 # install.packages("plot3D")
 library("plot3D")
 
-alpha_vector = seq(0.1,1000,length=10)
-beta_vector = seq(0.1,1000,length=10)
+alpha_vector = seq(0.1,10,length=10)
+beta_vector = seq(0.1,10,length=10)
 pi_vector <- c(0.65,0.35)
 
 M <- mesh(alpha_vector,beta_vector)
 
 ans_matrix <- matrix(0,nrow=length(alpha_vector),ncol=length(beta_vector))
 
+# log likelihood
 for (j_1 in 1:length(alpha_vector)){
   for (j_2 in 1:length(beta_vector)){
     ans_matrix[j_1,j_2] <- log_likelihood_f(allp$p1,pi_vector,c(1,alpha_vector[j_1]),c(1,beta_vector[j_2]))
   }
 }
 
-surf3D(M$x,M$y,ans_matrix, colkey=FALSE,bty="b2",xlab="alpha",ylab="beta",zlab="log likelihood")
+# likelihood (gives error since values become to small)
+for (j_1 in 1:length(alpha_vector)){
+  for (j_2 in 1:length(beta_vector)){
+    ans_matrix[j_1,j_2] <- likelihood_f(allp$p1,pi_vector,c(1,alpha_vector[j_1]),c(1,beta_vector[j_2]))
+  }
+}
+
+# expectation_f
+for (j_1 in 1:length(alpha_vector)){
+  for (j_2 in 1:length(beta_vector)){
+    ans_matrix[j_1,j_2] <- expectation_f(c(alpha_vector[j_1],beta_vector[j_2]),allp$p1,pi_vector,2,c(1,alpha_vector[j_1]),c(1,beta_vector[j_1]))
+  }
+}
+
+surf3D(M$x,M$y,ans_matrix, colkey=FALSE,bty="b2",xlab="alpha",ylab="beta",zlab="expectation_f")
 
 
 #################
