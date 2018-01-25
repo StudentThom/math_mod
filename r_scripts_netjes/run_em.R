@@ -1,6 +1,6 @@
 # Run EM algorith
 
-setwd("/media/mynewdrive1/Documenten/Wiskunde/2017-2018/math_mod/r_scripts_netjes")
+setwd("/home/thom/Documents/wiskunde/2017-2018/math_mod/r_scripts_netjes")
 
 # imports
 source("helpers.R")
@@ -8,12 +8,12 @@ source("load_and_plot.R")
 
 ### EXAMPLE 1 ###
 # variables
-data = allp$p2
-alpha = c(1,0.93,3)
-beta = c(1,2.96,2)
-number_of_iterations = 8
+data = allp$p3
+alpha = c(1,1)
+beta = c(1,8)
+number_of_iterations = 5
 # initial value
-pi_vector = c(0.5,0.3,0.2)
+pi_vector = c(0.5,0.5)
 
 # run EM algo
 start_time <- Sys.time()
@@ -39,7 +39,7 @@ plot_distribution(data, pi_vector_new, alpha_new, beta_new,main="New fit")
 data = allp$p2
 alpha = c(1,1)
 beta = c(1,3)
-number_of_iterations = 5
+number_of_iterations = 
 # initial value
 pi_vector = c(0.25,0.75)
 

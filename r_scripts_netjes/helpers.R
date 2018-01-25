@@ -1,7 +1,7 @@
 ### helper functions for EM algo ###
 
 # libraries
-library(docstring)
+#library(docstring)
 library(tictoc)
 
 #functions
@@ -103,6 +103,18 @@ expectation_f <- function(alpha_beta,data, pi_vector, j, alphas, betas){
   sum
 }
 
+likelihood_f <- function(data, pi_vector, alphas, betas){
+  product <- 1
+  for (i in 1:length(data)){
+    sum <- 0
+    for (j in 1:length(pi_vector)){
+      sum <- (sum + (pi_vector[j] * dbeta(data[i],alphas[j],betas[j])))
+    }   
+   product <- (product * sum)
+  }
+  return(product)
+}
+
 em_algo <- function(data,pi_vector,alpha,beta, number_of_iterations){
   
   #' Execute EM algorith
@@ -137,7 +149,7 @@ em_algo <- function(data,pi_vector,alpha,beta, number_of_iterations){
   list(pi_vector, alpha, beta, pi_vector_archive, alpha_archive, beta_archive)
 }
 
-plot_distribution <- function(data, pi_vector, alpha, beta, main){
+plot_distribution <- function(data, pi_vector, alpha, beta, main="Fit"){
 
   #' Plot mixture distribution
   #'
