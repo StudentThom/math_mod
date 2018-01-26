@@ -120,7 +120,7 @@ log_likelihood_f <- function(data, pi_vector, alphas, betas){
   for (i in 1:length(data)){
     sum_distr <- 0
     for (j in 1:length(pi_vector)){
-      sum_distr <- (sum_distr + (pi_vector[j] * dbeta(data[i],alphas[j],betas[j])))
+      sum_distr <- (sum_distr + (log(pi_vector[j] * dbeta(data[i],alphas[j],betas[j]))))
     }   
    sum_total <- (sum_total + sum_distr)
   }
@@ -145,12 +145,15 @@ em_algo <- function(data,pi_vector,alpha,beta, number_of_iterations){
   pi_vector_archive = matrix(0,number_of_iterations,length(pi_vector))
   alpha_archive = matrix(0,number_of_iterations,length(alpha))
   beta_archive = matrix(0,number_of_iterations,length(beta))
-  
+  log_lik <- seq(0,0,length=number_of_iterations) 
   for (n in 1:number_of_iterations){
     lijst = averaged_resp_weights(data, pi_vector, alpha, beta)
     pi_vector = lijst[[1]]
     alpha = lijst[[2]]
     beta = lijst[[3]]
+
+    # look at the likelihood
+    log_lik[n] <- log_likelihood_f(data,pi_vector,alpha,beta)
     
     # keep track of parameters during the process
     pi_vector_archive[n,1:length(pi_vector)] = pi_vector
@@ -158,7 +161,7 @@ em_algo <- function(data,pi_vector,alpha,beta, number_of_iterations){
     beta_archive[n,1:length(beta)] = beta
     
   }
-  list(pi_vector, alpha, beta, pi_vector_archive, alpha_archive, beta_archive)
+  list(pi_vector, alpha, beta, pi_vector_archive, alpha_archive, beta_archive, log_lik)
 }
 
 plot_distribution <- function(data, pi_vector, alpha, beta, main="Fit"){

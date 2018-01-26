@@ -42,8 +42,8 @@ plot(x,z)
 # install.packages("plot3D")
 library("plot3D")
 
-alpha_vector = seq(0.1,10,length=10)
-beta_vector = seq(0.1,10,length=10)
+alpha_vector = seq(0.1,5,length=10)
+beta_vector = seq(0.1,5,length=10)
 pi_vector <- c(0.65,0.35)
 
 M <- mesh(alpha_vector,beta_vector)
@@ -71,7 +71,7 @@ for (j_1 in 1:length(alpha_vector)){
   }
 }
 
-surf3D(M$x,M$y,ans_matrix, colkey=FALSE,bty="b2",xlab="alpha",ylab="beta",zlab="expectation_f")
+surf3D(M$x,M$y,ans_matrix, colkey=FALSE,bty="b2",xlab="alpha",ylab="beta",zlab="log likelihood")
 
 
 #################

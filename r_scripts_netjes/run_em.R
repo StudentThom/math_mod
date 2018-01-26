@@ -3,7 +3,7 @@
 install.packages("tictoc")
 library("tictoc")
 
-# setwd("/home/thom/Documents/wiskunde/2017-2018/math_mod/r_scripts_netjes")
+setwd("/home/thom/Documents/wiskunde/2017-2018/math_mod/r_scripts_netjes")
 setwd("/media/mynewdrive1/Documenten/Wiskunde/2017-2018/math_mod/r_scripts_netjes")
 
 # imports
@@ -15,7 +15,7 @@ source("load_and_plot.R")
 data = allp$p1
 alpha = c(1,3)
 beta = c(1,1)
-number_of_iterations = 11
+number_of_iterations = 10
 # initial value
 pi_vector = c(0.5,0.5)
 
@@ -29,6 +29,7 @@ beta_new <- lijst[[3]]
 pi_vector_archive <- lijst[[4]]
 alpha_archive <- lijst[[5]]
 beta_archive <- lijst[[6]]
+log_lik <- lijst[[7]]
 
 print_results(alpha,beta,pi_vector,start_time,alpha_new,beta_new,pi_vector_new,end_time)
 
