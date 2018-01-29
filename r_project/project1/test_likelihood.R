@@ -42,8 +42,8 @@ plot(x,z)
 # install.packages("plot3D")
 library("plot3D")
 
-alpha_vector = seq(0.1,5,length=10)
-beta_vector = seq(0.1,5,length=10)
+alpha_vector = seq(0.01,5.01,length=21)
+beta_vector = seq(0.01,10.01,length=21)
 pi_vector <- c(0.65,0.35)
 
 M <- mesh(alpha_vector,beta_vector)
@@ -71,11 +71,18 @@ for (j_1 in 1:length(alpha_vector)){
   }
 }
 
-surf3D(M$x,M$y,ans_matrix, colkey=FALSE,bty="b2",xlab="alpha",ylab="beta",zlab="log likelihood")
+surf3D(M$x,M$y,ans_matrix, colkey=FALSE,bty="b2",xlab="alpha",ylab="beta",zlab="log likelihood",shade=0.1,axes=TRUE,ticktype="detailed")
 
 
-#################
-x <- seq(0,1,length=101)
-plot(x,dbeta(x,1,500))
-
+#########################################
+# plot log likelihood as function of pi #
+#########################################
+alphas <- c(1,1)
+betas <- c(1,4)
+pi_2 <- seq(0,1,length=20)
+y <- seq(0,0,length=20)
+for (i in 1:length(pi_2)){
+  y[i] <- log_likelihood_f(allp$p1, c(1-pi_2[i],pi_2[i]),alphas,betas)
+}
+plot(pi_2,y)
 

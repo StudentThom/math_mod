@@ -120,9 +120,9 @@ log_likelihood_f <- function(data, pi_vector, alphas, betas){
   for (i in 1:length(data)){
     sum_distr <- 0
     for (j in 1:length(pi_vector)){
-      sum_distr <- (sum_distr + (log(pi_vector[j] * dbeta(data[i],alphas[j],betas[j]))))
+      sum_distr <- (sum_distr + (pi_vector[j] * dbeta(data[i],alphas[j],betas[j])))
     }   
-   sum_total <- (sum_total + sum_distr)
+   sum_total <- (sum_total + log(sum_distr))
   }
   return(sum_total)
 }
@@ -142,11 +142,19 @@ em_algo <- function(data,pi_vector,alpha,beta, number_of_iterations){
   #' TO DO?!: replace number_of_titerations criteria with convergence criteria
   #'
 
-  pi_vector_archive = matrix(0,number_of_iterations,length(pi_vector))
-  alpha_archive = matrix(0,number_of_iterations,length(alpha))
-  beta_archive = matrix(0,number_of_iterations,length(beta))
-  log_lik <- seq(0,0,length=number_of_iterations) 
-  for (n in 1:number_of_iterations){
+  pi_vector_archive = matrix(0,number_of_iterations+1,length(pi_vector))
+  alpha_archive = matrix(0,number_of_iterations+1,length(alpha))
+  beta_archive = matrix(0,number_of_iterations+1,length(beta))
+  log_lik <- seq(0,0,length=number_of_iterations+1) 
+
+  # save initial parameters as well
+  log_lik[1] <- log_likelihood_f(data,pi_vector,alpha,beta)
+  pi_vector_archive[1,1:length(pi_vector)] = pi_vector
+  alpha_archive[1,1:length(alpha)] = alpha
+  beta_archive[1,1:length(beta)] = beta
+ 
+  for (n in 2:(number_of_iterations+1)){
+    print(n)
     lijst = averaged_resp_weights(data, pi_vector, alpha, beta)
     pi_vector = lijst[[1]]
     alpha = lijst[[2]]

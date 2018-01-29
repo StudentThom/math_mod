@@ -15,7 +15,7 @@ source("load_and_plot.R")
 data = allp$p1
 alpha = c(1,3)
 beta = c(1,1)
-number_of_iterations = 10
+number_of_iterations = 20
 # initial value
 pi_vector = c(0.5,0.5)
 
@@ -42,11 +42,11 @@ plot_distribution(data, pi_vector_new, alpha_new, beta_new,main="New fit")
 ### DATASET 2 ###
 # variables
 data = allp$p2
-alpha = c(1,1,1)
-beta = c(1,3.8,6)
+alpha = c(1,3)
+beta = c(1,1)
 number_of_iterations = 11
 # initial value
-pi_vector = c(0.4,0.3,0.3)
+pi_vector = c(0.5,0.5)
 
 # run EM algo
 lijst <- em_algo(data,pi_vector,alpha,beta,number_of_iterations)
@@ -88,8 +88,8 @@ plot_distribution(data, pi_vector_new, round(alpha_new,2), round(beta_new,2),mai
 ### DATASET 4 ###
 # variables
 data = allp$p4
-alpha = c(1,2)
-beta = c(1,1)
+alpha = c(1,1,3)
+beta = c(1,4,1)
 number_of_iterations = 11
 # initial value
 pi_vector = c(0.5,0.5)
@@ -143,4 +143,10 @@ for (n in 1:11){
   text(x_pos_2,y_pos_3,"=")
   text(x_pos_3,y_pos_3,round(pi_vector_archive[n,2],digits=2))
 }
+
+#################################################
+# Plot alpha/beta/pi_j_n 's over iterationsteps #
+#################################################
+
+
 
