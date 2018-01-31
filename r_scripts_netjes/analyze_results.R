@@ -10,16 +10,16 @@ colours <- c(alpha_col,beta_col,pi_col)
 
 # plot values for each iterations
 tijd <- seq(0,number_of_iterations,1)
-plot(tijd,alpha_archive[,2],type="b",col=alpha_col,ylim=c(0,5),xlab=x_as,ylab="parameterwaarde",main=titel)
-lines(tijd,beta_archive[,2],type="b",col=beta_col)
-lines(tijd,pi_vector_archive[,2],type="b",col=pi_col)
+plot(tijd,alpha_archive[,1],type="b",col=alpha_col,ylim=c(0,5),xlab=x_as,ylab="parameterwaarde",main=titel)
+lines(tijd,beta_archive[,1],type="b",col=beta_col)
+lines(tijd,pi_vector_archive[,1],type="b",col=pi_col)
 legend(x=5,legend=expression(
   alpha["2,n"],beta["2,n"],pi["2,n"]
 ),lwd=1,col=colours)
 
 # plot log likelihood
 tijd <- seq(0,number_of_iterations,1)
-plot(tijd,log_lik,type="b",ylab="Log likelihood",xlab=x_as)
+plot(tijd,log_lik,type="b",ylab="log likelihood",xlab=x_as)
 
 # afgeleide log likelihood (to show convergence)
 log_lik_derivative <- 0
@@ -27,7 +27,7 @@ for (n in 1:(length(log_lik)-1)){
   log_lik_derivative[n] <- log_lik[n+1] - log_lik[n]
 }
 x <- seq(1,length(log_lik_derivative),1)
-plot(x,log_lik_derivative,type="b",xlab = x_as,ylab="Verschil met vorige log likelihood")
+plot(x,log_lik_derivative,type="b",xlab = x_as,ylab="verschil met vorige log likelihood")
 
 
 ###########

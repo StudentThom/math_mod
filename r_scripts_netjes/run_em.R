@@ -89,8 +89,8 @@ plot_distribution(data, pi_vector_new, round(alpha_new,2), round(beta_new,2),mai
 ### DATASET 4 ###
 # variables
 data = allp$p4
-alpha = c(1,1,3)
-beta = c(1,4,1)
+alpha = c(1,3)
+beta = c(1,1)
 number_of_iterations = 11
 # initial value
 pi_vector = c(0.5,0.5)

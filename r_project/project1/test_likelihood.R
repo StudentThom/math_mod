@@ -53,7 +53,7 @@ ans_matrix <- matrix(0,nrow=length(alpha_vector),ncol=length(beta_vector))
 # log likelihood
 for (j_1 in 1:length(alpha_vector)){
   for (j_2 in 1:length(beta_vector)){
-    ans_matrix[j_1,j_2] <- log_likelihood_f(allp$p1,pi_vector,c(1,alpha_vector[j_1]),c(1,beta_vector[j_2]))
+    ans_matrix[j_1,j_2] <- log_likelihood_f(allp$p2,pi_vector,c(1,alpha_vector[j_1]),c(1,beta_vector[j_2]))
   }
 }
 

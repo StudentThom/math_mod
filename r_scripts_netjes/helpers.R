@@ -66,7 +66,7 @@ averaged_resp_weights <- function(data, pi_vector, alpha, beta) {
     pi_new_vector[j] = average
     
     # make MLE estiamtion for alpha and beta if distribution is not the first one (i.e. uniform)
-    if (j != 1){
+    if (j != 99){
       tic("alpha_beta_mle")
       out <- optim(c(alpha[j],beta[j]),expectation_f,lower=c(0.1,0.1),method="L-BFGS-B",data=allp$p1,pi_vector=pi_vector,j=j, alphas=alpha,betas=beta,control=list(fnscale = -1))
       par <- out$par
