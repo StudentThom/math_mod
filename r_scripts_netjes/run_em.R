@@ -44,7 +44,7 @@ plot_distribution(data, pi_vector_new, alpha_new, beta_new,main="New fit")
 data = allp$p2
 alpha = c(1,3)
 beta = c(1,1)
-number_of_iterations = 11
+number_of_iterations = 25
 # initial value
 pi_vector = c(0.5,0.5)
 
@@ -56,6 +56,7 @@ beta_new <- lijst[[3]]
 pi_vector_archive <- lijst[[4]]
 alpha_archive <- lijst[[5]]
 beta_archive <- lijst[[6]]
+log_lik <- lijst[[7]]
 # plot result
 par(mfrow=c(1,2))
 plot_distribution(data, pi_vector, alpha, beta,main="Old fit")

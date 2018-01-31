@@ -1,7 +1,8 @@
 # analyze results of run_em
 
 #variables
-x_as <- "Iteratie stap"
+titel <- "Parameterwaarden per iteratiestap voor dataset 2"
+x_as <- "iteratiestap"
 alpha_col <-"red"
 beta_col <-"blue"
 pi_col <-"black"
@@ -9,7 +10,7 @@ colours <- c(alpha_col,beta_col,pi_col)
 
 # plot values for each iterations
 tijd <- seq(0,number_of_iterations,1)
-plot(tijd,alpha_archive[,2],type="b",col=alpha_col,ylim=c(0,5),xlab=x_as,ylab="parameterwaarde")
+plot(tijd,alpha_archive[,2],type="b",col=alpha_col,ylim=c(0,5),xlab=x_as,ylab="parameterwaarde",main=titel)
 lines(tijd,beta_archive[,2],type="b",col=beta_col)
 lines(tijd,pi_vector_archive[,2],type="b",col=pi_col)
 legend(x=5,legend=expression(
