@@ -42,8 +42,8 @@ plot(x,z)
 # install.packages("plot3D")
 library("plot3D")
 
-alpha_vector = seq(0.01,5.01,length=21)
-beta_vector = seq(0.01,10.01,length=21)
+alpha_vector = seq(0.01,5.01,length=11)
+beta_vector = seq(0.01,10.01,length=11)
 pi_vector <- c(0.65,0.35)
 
 M <- mesh(alpha_vector,beta_vector)
@@ -53,7 +53,7 @@ ans_matrix <- matrix(0,nrow=length(alpha_vector),ncol=length(beta_vector))
 # log likelihood
 for (j_1 in 1:length(alpha_vector)){
   for (j_2 in 1:length(beta_vector)){
-    ans_matrix[j_1,j_2] <- log_likelihood_f(allp$p2,pi_vector,c(1,alpha_vector[j_1]),c(1,beta_vector[j_2]))
+    ans_matrix[j_1,j_2] <- log_likelihood_f(allp$p1,pi_vector,c(1,alpha_vector[j_1]),c(1,beta_vector[j_2]))
   }
 }
 
@@ -71,7 +71,7 @@ for (j_1 in 1:length(alpha_vector)){
   }
 }
 
-surf3D(M$x,M$y,ans_matrix, colkey=FALSE,bty="b2",xlab="alpha",ylab="beta",zlab="log likelihood",shade=0.1,axes=TRUE,ticktype="detailed")
+surf3D(M$x,M$y,ans_matrix, colkey=TRUE,bty="b2",xlab="alpha",ylab="beta",zlab="log likelihood",shade=0.1,axes=TRUE,ticktype="detailed")
 
 
 #########################################
